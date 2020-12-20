@@ -1,13 +1,23 @@
+<<<<<<< HEAD
 import React from 'react';
+=======
+import React, { StrictMode } from 'react';
+>>>>>>> c74cb0f5d72db78db158cee6a600f905abcc975b
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
+<<<<<<< HEAD
   <React.StrictMode>
     <App />
   </React.StrictMode>,
+=======
+  <StrictMode>
+    <App />
+  </StrictMode>,
+>>>>>>> c74cb0f5d72db78db158cee6a600f905abcc975b
   document.getElementById('root')
 );
 
