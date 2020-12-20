@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 // import logo from './logo.svg';
 import Table from "./components/table";
 import './App.css';
@@ -26,18 +25,3 @@ function App() {
   //   </div>
   // );
 }
-=======
-import * as React from "react";
-import { Admin, Resource } from 'react-admin';
-import jsonServerProvider from 'ra-data-json-server';
-import { UserList } from './users'
-
-const dataProvider = jsonServerProvider('https://jsonplaceholder.typicode.com');
-const App = () => (
-  <Admin dataProvider={dataProvider}>
-    <Resource name="users" list={UserList} />
-  </Admin>
-);
->>>>>>> c74cb0f5d72db78db158cee6a600f905abcc975b
-
-export default App;
