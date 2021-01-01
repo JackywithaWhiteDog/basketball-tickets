@@ -1,0 +1,28 @@
+version: "3.8"
+
+services:
+  mysql:
+    image: mysql:8.0
+    restart: always
+    environment: 
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: nba
+      LANG: C.UTF-8
+    expose:
+      - 3306
+    networks:
+      - mynetwork
+  
+  server:
+    build: 
+      context: .
+      dockerfile: Dockerfile 
+    ports: 
+      - 80:80
+    depends_on:
+      - mysql
+    networks:
+      - mynetwork
+
+networks:
+  mynetwork:
