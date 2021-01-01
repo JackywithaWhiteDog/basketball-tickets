@@ -4,9 +4,12 @@ import { HashRouter, Switch } from "react-router-dom"
 import { PublicRoute } from "./route"
 
 import Layout from './layout'
-import Table from './table'
+//import Table from './table'
 import Login from './login'
 import Signup from './signup'
+import PlayerPage from './playerPage'
+import GamePage from './gamePage'
+import TeamPage from './teamPage'
 
 export default function App () {
   return (
@@ -16,7 +19,25 @@ export default function App () {
           restricted={false}
           exact
           path="/"
-          component={() => <Layout component={() => <Table data={[1,2,3]} />} />}
+          component={() => <Layout title="NBA - Search for players" component={() => <PlayerPage />} />}
+        />
+        <PublicRoute
+          restricted={false}
+          exact
+          path="/player"
+          component={() => <Layout title="NBA - Search for players" component={() => <PlayerPage />} />}
+        />
+        <PublicRoute
+          restricted={false}
+          exact
+          path="/game"
+          component={() => <Layout title="NBA - Search for games" component={() => <GamePage />} />}
+        />
+        <PublicRoute
+          restricted={false}
+          exact
+          path="/team"
+          component={() => <Layout title="NBA - Search for teams" component={() => <TeamPage />} />}
         />
         <PublicRoute
           restricted={true}

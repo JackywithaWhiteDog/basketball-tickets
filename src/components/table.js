@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 // const Table = props => {
 //     return (
 //         <ul>
@@ -10,18 +9,6 @@
 
 
 //  function Table2(props){
-=======
-const Table = props => {
-    return (
-        <ul>
-            {props.data.map(item => (<li key={item}>{item}</li>))}
-        </ul>
-    )
-};
-
-
-// function Table2(props){
->>>>>>> c7ddd1a90b6d02945e73fd0f4b461aca32f3ab25
 
 //  }
 

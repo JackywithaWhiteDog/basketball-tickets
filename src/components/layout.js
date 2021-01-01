@@ -28,7 +28,7 @@ export default function Layout (props) {
   const classes = useStyles()
   return (
     <div>
-      <Header />
+      <Header title={props.title}/>
       <Sidebar />
       <main
         className={clsx(classes.main, {[classes.mainShift]: openSidebar})}

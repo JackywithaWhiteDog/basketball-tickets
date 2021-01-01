@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-export default function Header () {
+export default function Header (props) {
   const openSidebar = useSelector(state => state.utils.sidebar, shallowEqual)
   const dispatch =  useDispatch()
   const classes = useStyles()
@@ -50,7 +50,7 @@ export default function Header () {
         <MenuIcon />
       </IconButton>
         <Typography variant="h6" className={classes.title}>
-          NBA Tickets
+          {props.title}
         </Typography>
         <Button variant="outlined">
           Login
