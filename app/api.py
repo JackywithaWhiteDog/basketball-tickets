@@ -8,6 +8,13 @@ def api_create():
 
   @api.route('/signup', methods=['POST'])
   def signup():
+    try:
+      name = request.args['name']
+      account = request.args['account']
+      password = request.args['password']
+    except:
+        return 'Bad Request', 400
+
     res = {
       'code': 200,
     }
@@ -15,6 +22,12 @@ def api_create():
 
   @api.route('/login', methods=['POST'])
   def login():
+    try:
+      account = request.args['account']
+      password = request.args['password']
+    except:
+        return 'Bad Request', 400
+
     res = {
       'code': 200,
     }
