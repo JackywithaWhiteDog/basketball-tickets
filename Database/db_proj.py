@@ -214,7 +214,7 @@ def inputData(table, className):
 #user = user.where(pd.notnull(user), None)
 #ticket = pd.read_csv("/Users/pianoforte/Downloads/wei/Ticket.csv")
 #ticket = ticket.where(pd.notnull(ticket), None)
-spon_team = pd.read_csv("/Users/pianoforte/Downloads/new/Spon_team.csv")
+#spon_team = pd.read_csv("/Users/pianoforte/Downloads/new/Spon_team.csv")
 #player_in = inputData(player, Player)
 #coach_in = inputData(coach, Coach)
 #game_in = inputData(game, Game)
@@ -225,7 +225,7 @@ spon_team = pd.read_csv("/Users/pianoforte/Downloads/new/Spon_team.csv")
 #playin_in = inputData(playin, Playin)
 #user_in = inputData(user, User)
 #ticket_in = inputData(ticket, Ticket)
-spon_team_in = inputData(spon_team, Spon_Team)
+#spon_team_in = inputData(spon_team, Spon_Team)
 
 with app.app_context():
     db.create_all()
