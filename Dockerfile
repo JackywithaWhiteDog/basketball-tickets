@@ -26,6 +26,6 @@ RUN pip install --upgrade pip && \
 ENV FLASK_APP=app
 ENV FLASK_ENV=production
 ENV FLASK_RUN_HOST=0.0.0.0
-ENV FLASK_RUN_PORT=80
+ENV FLASK_RUN_PORT=5000
 
 CMD [ "flask", "run" ]

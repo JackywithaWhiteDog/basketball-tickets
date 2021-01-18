@@ -55,6 +55,7 @@ export default function Form (props) {
           label="User Name"
           name="name"
           autoComplete="name"
+          autoFocus
         />
         }
         <TextField
@@ -66,7 +67,7 @@ export default function Form (props) {
           label="Account"
           name="account"
           autoComplete="account"
-          autoFocus
+          autoFocus={props.isLogin}
         />
         <TextField
           variant="outlined"
