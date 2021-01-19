@@ -10,6 +10,9 @@ const useStyles = makeStyles({
     TableDiv:{
         padding:'10px 20px 10px 20px'
     },
+    container: {
+        maxHeight: '35vw',
+    },
 })
 
 
@@ -21,7 +24,7 @@ function PlayerPage(){
                 <PlayerSelect pos={Player_pos} team={Player_team} order={Player_order}/>
             </div>
             <div className={classes.TableDiv}>
-                <BasicTable rows={rows} title={title}/>
+                <BasicTable rows={rows} title={title} checkbox={true} TableStyle={classes.container}/>
             </div>
         </div>
     )

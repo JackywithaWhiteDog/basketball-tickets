@@ -23,10 +23,11 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';    
 import FavoriteCheckbox from './checkBox';
+import BuyButton from './buyTicket';
 
 const useStyles = makeStyles({
   table: {
-    minWidth: 650,
+    minWidth: 200,
   },
 });
 
@@ -35,10 +36,9 @@ function BasicTable(props) {
   var AttributeCount = props.title.length - 1;
   console.log(AttributeCount);
 
-
   return (
-    <TableContainer component={Paper}>
-      <Table className={classes.table} aria-label="simple table">
+    <TableContainer className={props.TableStyle} component={Paper}>
+      <Table stickyHeader className={classes.table}>
         <TableHead>
           <TableRow>
             <TableCell>{props.title[0]}</TableCell>
@@ -51,16 +51,25 @@ function BasicTable(props) {
         </TableHead>
         <TableBody>
           {props.rows.map((row) => (
-            <TableRow key={row[0]}>
+            <TableRow hover key={row[0]}>
               <TableCell component="th" scope="row">
                 {row[0]}
               </TableCell>
               {row.slice().splice(1, AttributeCount).map((cell) => (
                   <TableCell align="right">{cell}</TableCell>
               ))}
-              <TableCell align="right">
-                <FavoriteCheckbox name={row[0]}/>
-              </TableCell>
+              {
+                props.checkbox && 
+                <TableCell align="right">
+                  <FavoriteCheckbox name={row[0]}/>
+                </TableCell>
+              }
+              {
+                props.button &&
+                <TableCell align="right">
+                  <BuyButton value={row[0]}/>
+                </TableCell>
+              }
             </TableRow>
           ))}
         </TableBody>

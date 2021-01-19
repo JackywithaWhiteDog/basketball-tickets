@@ -14,9 +14,39 @@ const rows = [
     createData('Eclair', 262, 16.0, 24, 6.0),
     createData('Cupcake', 305, 3.7, 67, 4.3),
     createData('Gingerbread', 356, 16.0, 49, 3.9),
+    createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
+    createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
+    createData('Eclair', 262, 16.0, 24, 6.0),
+    createData('Cupcake', 305, 3.7, 67, 4.3),
+    createData('Gingerbread', 356, 16.0, 49, 3.9),
+    createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
+    createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
+    createData('Eclair', 262, 16.0, 24, 6.0),
+    createData('Cupcake', 305, 3.7, 67, 4.3),
+    createData('Gingerbread', 356, 16.0, 49, 3.9),
 ];
 
 const title = createTitle('Dessert (100g serving)', 'Calories', 'Fat (g)', 'Carbs (g)', 'Protein (g)', 'Favorite');
+
+const ticketTitle = ['category','left'];
+const ticketRows =[
+    ['1','2'],
+    ['3','4'],
+    ['1','2'],
+    ['3','4'],
+    ['1','2'],
+    ['3','4'],
+    ['1','2'],
+    ['3','4'],
+    ['1','2'],
+    ['3','4'],
+    ['1','2'],
+    ['3','4'],
+    ['1','2'],
+    ['3','4'],
+    ['1','2'],
+    ['3','4']
+]
 
 // data for PlayerSelect
 
@@ -34,4 +64,4 @@ const Game_team1 = {name:"team1", items:["team1","team2","team3","team4"], defau
 const Game_team2 = {name:"team2", items:["team1","team2","team3","team4"], default:"All"};
 const Game_order = {name:"sort by", items:[], default:"date"};
 
-export {rows, title, Player_pos, Player_team, Player_order, Team_order, Game_team1, Game_team2, Game_order};
+export {rows, title, ticketRows, ticketTitle, Player_pos, Player_team, Player_order, Team_order, Game_team1, Game_team2, Game_order};

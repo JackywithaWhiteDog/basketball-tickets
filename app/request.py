@@ -69,7 +69,7 @@ def get_game_menu():
     with engine.connect() as con:
         rs = con.execute('SELECT Date FROM Game')
         for row in rs:
-            home_team_tmp[row.Date] = row.Date
+            date_tmp[row.Date] = row.Date
 
     menu['Date'] = date_tmp
 
