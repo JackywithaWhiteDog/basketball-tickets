@@ -1,4 +1,5 @@
 from sqlalchemy import create_engine
+from datetime import datetime
 
 engine = create_engine('mysql+pymysql://root:root@mysql:3306/nba')
 
@@ -65,13 +66,13 @@ def get_game_menu():
                     'Price': 'Price'}
         
     #Date
-    date_tmp = {}
-    with engine.connect() as con:
-        rs = con.execute('SELECT Date FROM Game')
-        for row in rs:
-            date_tmp[row.Date] = row.Date
+    # date_tmp = {}
+    # with engine.connect() as con:
+    #     rs = con.execute('SELECT Date FROM Game')
+    #     for row in rs:
+    #         date_tmp[row.Date] = row.Date
 
-    menu['Date'] = date_tmp
+    # menu['Date'] = date_tmp
 
     #Home_team_ID
     home_team_tmp = {}
@@ -115,6 +116,7 @@ def get_menu(page_name):
     
         
 def req(request):
+    print(request)
     if request['table'] == 'player':
         col_name = []
         sql = ' FROM Player'
@@ -136,7 +138,7 @@ def req(request):
             sql_get = con.execute(sql)
             table = []
             for t in sql_get:
-                table.append(t)
+                table.append(list(t))
 
         to_return = {'Column_names': col_name, #list
                 'Data': table}
@@ -157,7 +159,7 @@ def req(request):
             sql_get = con.execute(sql)
             table = []
             for t in sql_get:
-                table.append(t)
+                table.append(list(t))
 
         to_return = {'Column_names': col_name, #list
                 'Data': table}
@@ -174,8 +176,8 @@ def req(request):
             col_name.append(request['query']['Column'])
 
         strs = []
-        if request['query']['date'] != 'All':
-            strs.append('Date="' + request['query']['Date'] + '"')
+        # if request['query']['date'] != 'All':
+        #     strs.append('Date="' + request['query']['Date'] + '"')
         if request['query']['Home_team'] != 'All':
             strs.append('Home_team_ID=' + request['query']['Home_team'])
         if request['query']['Away_team'] !='All':
@@ -188,11 +190,11 @@ def req(request):
             sql = sql + ' WHERE ' + strs[0]
         sql = sql + ' ORDER BY ' + request['query']['Order_by']
 
+        table = []
         with engine.connect() as con:
             sql_get = con.execute(sql)
-            table = []
             for t in sql_get:
-                table.append(t)
+                table.append(list([t if type(t) != datetime else t.strftime('%Y/%m/%d') for item in t]))
 
         to_return = {'Column_names': col_name, #list
                 'Data': table}
