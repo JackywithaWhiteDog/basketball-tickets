@@ -4,8 +4,9 @@ from flask_sqlalchemy import SQLAlchemy
 db = SQLAlchemy()
 
 def init_db():
-  from .models import insertData
-  db.create_all()
+  pass
+  # from .models import insertData
+  # db.create_all()
   # for iD in insertData:
   #   db.session.add_all(iD)
   #   db.session.commit()
@@ -19,7 +20,7 @@ def create_app():
   with app.app_context():
     init_db()
     from .api import api_create
-    from .website import website_create
+    # from .website import website_create
     app.register_blueprint(api_create())
-    app.register_blueprint(website_create())
+    # app.register_blueprint(website_create())
     return app

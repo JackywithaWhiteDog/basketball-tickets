@@ -1,5 +1,8 @@
 from flask import Flask, blueprints, Response, request
+from sqlalchemy import create_engine, insert, select
 import json
+
+engine = create_engine('mysql+pymysql://root:root@mysql:3306/nba')
 
 def api_create():
   api = blueprints.Blueprint('api',
@@ -15,6 +18,13 @@ def api_create():
     except:
         return 'Bad Request', 400
 
+    with engine.connect() as connection:
+      with connection.begin():
+        connection.execute(insert('User').
+                           values(Name=name,
+                                  Account=account,
+                                  Password=password))
+
     res = {
       'code': 200,
     }
@@ -27,9 +37,19 @@ def api_create():
       password = request.args['password']
     except:
         return 'Bad Request', 400
-
+    with engine.connect() as connection:
+      result = connection.execute(f"select * from User where account='{account}' and password='{password}'")
+    cnt = 0
+    for row in result:
+      cnt += 1
+      break
+    if cnt > 0:
+      res = {
+        'code': 200,
+      }
+      return Response(json.dumps(res), mimetype='application/json')
     res = {
-      'code': 200,
+      'code': 401
     }
     return Response(json.dumps(res), mimetype='application/json')
 
@@ -39,8 +59,10 @@ def api_create():
     try:
       table = request.args['table']
     except:
-        return 'Bad Request', 400
+      print(request.args)
+      return 'Bad Request', 400
     if table not in ['player', 'team', 'game']:
+      print(table)
       return 'Bad Request', 400
     res = get_menu(table)
     res['code'] = 200
@@ -50,13 +72,17 @@ def api_create():
   def data():
     from app.request import req
     try:
-      table = request.args['table']
+      payload = {
+        'table': request.args['table'],
+        'query': json.loads(request.args['query'])
+      }
     except:
         return 'Bad Request', 400
-    if table not in ['player', 'team', 'game']:
+    if payload['table'] not in ['player', 'team', 'game']:
       return 'Bad Request', 400
-    res = req(request.args)
+    res = req(payload)
     res['code'] = 200
+    print(res['Data'][0])
     return Response(json.dumps(res), mimetype='application/json')
 
   return api
