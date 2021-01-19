@@ -1,15 +1,20 @@
-import React from "react";
-import { Route, Redirect } from "react-router-dom";
-import { shallowEqual, useSelector } from "react-redux";
+import React from "react"
+import { Route, Redirect } from "react-router-dom"
+import { shallowEqual, useSelector } from "react-redux"
 
-const PrivateRoute = ({component: Component, ...rest}) => {
-  const token = useSelector(state => state.token, shallowEqual)
+const PrivateRoute = ({component: Component, redirect, ...rest}) => {
+  const token = useSelector(state => state.user.token, shallowEqual)
   return (
     <Route
       {...rest}
       render = {props => (
         token ?
-          <Component {...props} />
+          (
+            redirect ?
+            <Redirect to={redirect} />
+            :
+            <Component {...props} />
+          )
           :
           <Redirect to="/login" />
       )}
@@ -17,8 +22,8 @@ const PrivateRoute = ({component: Component, ...rest}) => {
   );
 };
 
-const PublicRoute = ({component: Component, restricted, ...rest}) => {
-  const token = useSelector(state => state.token, shallowEqual)
+const PublicRoute = ({component: Component, restricted, redirect, ...rest}) => {
+  const token = useSelector(state => state.user.token, shallowEqual)
   return (
     <Route
       {...rest}
@@ -26,7 +31,12 @@ const PublicRoute = ({component: Component, restricted, ...rest}) => {
         token && restricted ?
           <Redirect to="/" />
           :
-          <Component {...props} />
+          (
+            redirect ?
+            <Redirect to={redirect} />
+            :
+            <Component {...props} />
+          )
       )}
     />
   );

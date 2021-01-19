@@ -1,6 +1,7 @@
 import { shallowEqual, useSelector, useDispatch } from 'react-redux'
+import { Link as RouterLink } from 'react-router-dom'
 import clsx from 'clsx'
-import { makeStyles, IconButton, Toolbar, Typography, Button } from "@material-ui/core"
+import { makeStyles, IconButton, Toolbar, Typography, Button, Link } from "@material-ui/core"
 import MenuIcon from "@material-ui/icons/Menu"
 
 const drawerWidth = 240;
@@ -24,12 +25,17 @@ const useStyles = makeStyles((theme) => ({
   menuButton: {
     marginRight: theme.spacing(2),
   },
+  leftButton: {
+    marginRight: 10
+  },
   title: {
     flex: 1,
   }
 }))
 
 export default function Header (props) {
+  const token = useSelector(state => state.user.token, shallowEqual)
+
   const openSidebar = useSelector(state => state.utils.sidebar, shallowEqual)
   const dispatch =  useDispatch()
   const classes = useStyles()
@@ -52,9 +58,25 @@ export default function Header (props) {
         <Typography variant="h6" className={classes.title}>
           {props.title}
         </Typography>
-        <Button variant="outlined">
-          Login
-        </Button>
+        {
+          token ?
+          <Button variant="outlined">
+            Logout
+          </Button>
+          :
+          <div>
+            <Link component={RouterLink} to="/login" variant="body2" underline='none'>
+              <Button className={classes.leftButton} variant="outlined" >
+                Login
+              </Button>
+            </Link>
+            <Link component={RouterLink} to="/signup" variant="body2" underline='none'>
+              <Button className={classes.leftButton} variant="outlined" >
+                Signup
+              </Button>
+            </Link>
+          </div>
+        }
       </Toolbar>
   )
 }

@@ -18,9 +18,9 @@ export default function App () {
       <Switch>
         <PublicRoute
           restricted={false}
+          redirect={"/player"}
           exact
           path="/"
-          component={() => <Layout title="NBA - Search for players" component={() => <PlayerPage />} />}
         />
         <PublicRoute
           restricted={false}
