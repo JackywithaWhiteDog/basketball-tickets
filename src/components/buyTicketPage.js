@@ -3,7 +3,7 @@ import Image from 'material-ui-image'
 import TicketImage from "../picture/court.jpg"
 import { Grid } from "@material-ui/core" 
 import BasicTable from './table';
-import {ticketRows, ticketTitle} from "./data"
+import { shallowEqual, useSelector } from 'react-redux'
 
 const useStyles = makeStyles({
     image:{
@@ -23,7 +23,8 @@ const useStyles = makeStyles({
 
 function BuyTicketPage(){
     const classes = useStyles();
-    // const openSidebar = useSelector(state => state.utils.sidebar, shallowEqual)
+    const ticketTitle = useSelector(state => state.buyticket.title, shallowEqual);
+    const ticketRows = useSelector(state => state.buyticket.rows, shallowEqual);
     return(
         <Grid container>
             <Grid item xs={6}>

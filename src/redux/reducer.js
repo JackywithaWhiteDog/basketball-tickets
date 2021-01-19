@@ -18,6 +18,15 @@ const initialState = {
   team:{
     title:[],
     rows:[]
+  },
+  buyticket:{
+    title:[],
+    rows:[],
+    Game_ID:0
+  },
+  viewticket:{
+    title:[],
+    rows:[]
   }
 }
 
@@ -68,6 +77,18 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         team: action.payload
+      }
+    }
+    case 'viewticket/setViewTicket': {
+      return {
+        ...state,
+        viewticket: action.payload
+      }
+    }
+    case 'buyticket/setBuyTicket': {
+      return {
+        ...state,
+        viewticket: action.payload
       }
     }
     default: {
