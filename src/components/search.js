@@ -25,7 +25,7 @@ function clicked(value, dispatch) {
         }
         else
         {
-            team1 = Object.values(selection.Home_team_ID)[attr.team1-1];
+            team1 = Object.keys(selection.Home_team_ID)[attr.team1-1];
         }
         if(attr.team2 === "")
         {
@@ -33,15 +33,15 @@ function clicked(value, dispatch) {
         }
         else
         {
-            team2 = Object.values(selection.Away_team_ID)[attr.team2-1]
+            team2 = Object.keys(selection.Away_team_ID)[attr.team2-1]
         }
         if(attr.order === "")
         {
-            order = Object.values(selection.Order_by)[0];
+            order = Object.keys(selection.Order_by)[0];
         }
         else
         {
-            order = Object.values(selection.Order_by)[attr.order]
+            order = Object.keys(selection.Order_by)[attr.order]
         }
 
         const data = {
@@ -83,7 +83,7 @@ function clicked(value, dispatch) {
         }
         else
         {
-            pos = Object.values(selection.Position)[attr.pos-1];
+            pos = Object.keys(selection.Position)[attr.pos-1];
         }
         if(attr.team === "")
         {
@@ -91,15 +91,15 @@ function clicked(value, dispatch) {
         }
         else
         {
-            team = Object.values(selection.Team)[attr.team-1]
+            team = Object.keys(selection.Team)[attr.team-1]
         }
         if(attr.order === "")
         {
-            order = Object.values(selection.Order_by)[0];
+            order = Object.keys(selection.Order_by)[0];
         }
         else
         {
-            order = Object.values(selection.Order_by)[attr.order]
+            order = Object.keys(selection.Order_by)[attr.order]
         }
 
         const data = {
@@ -135,11 +135,11 @@ function clicked(value, dispatch) {
         let fav = attr.fav;
         if(attr.order === "")
         {
-            order = Object.values(selection.Order_by)[0];
+            order = Object.keys(selection.Order_by)[0];
         }
         else
         {
-            order = Object.values(selection.Order_by)[attr.order]
+            order = Object.keys(selection.Order_by)[attr.order]
         }
 
         const data = {

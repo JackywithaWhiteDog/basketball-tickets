@@ -23,7 +23,9 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';    
 import FavoriteCheckbox from './checkBox';
-import BuyButton from './buyTicket';
+import TicketButton from './ticketButton';
+import RefundTicketButton from './refundTicketButton';
+import GameButton from './gameButton';
 
 const useStyles = makeStyles({
   table: {
@@ -65,9 +67,21 @@ function BasicTable(props) {
                 </TableCell>
               }
               {
-                props.button &&
+                props.gamebutton &&
                 <TableCell align="right">
-                  <BuyButton value={row[0]}/>
+                  <GameButton value={row[0]}/>
+                </TableCell>
+              }
+              {
+                props.ticketbutton &&
+                <TableCell align="right">
+                  <TicketButton value={row[0]}/>
+                </TableCell>
+              }
+              {
+                props.refundTicketbutton &&
+                <TableCell align="right">
+                  <RefundTicketButton value={row[0]}/>
                 </TableCell>
               }
             </TableRow>

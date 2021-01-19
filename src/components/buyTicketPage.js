@@ -21,7 +21,7 @@ const useStyles = makeStyles({
 })
 
 
-function TicketPage(){
+function BuyTicketPage(){
     const classes = useStyles();
     // const openSidebar = useSelector(state => state.utils.sidebar, shallowEqual)
     return(
@@ -34,10 +34,10 @@ function TicketPage(){
                 />
             </Grid>
             <Grid item xs={6}>
-                <BasicTable rows={ticketRows} title={ticketTitle} button={true}/>
+                <BasicTable rows={ticketRows} title={ticketTitle} ticketbutton={true}/>
             </Grid>
         </Grid>
     )
 }
 
-export default TicketPage;
+export default BuyTicketPage;

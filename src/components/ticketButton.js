@@ -1,5 +1,6 @@
 import { Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import request from '../utils/request'
 
 const useStyles = makeStyles({
     button:{
@@ -8,10 +9,11 @@ const useStyles = makeStyles({
 })
 
 function clicked(a) {
-    alert(["name:", a]);
+    alert(["buy:", a]);
+    document.location.href="./#/viewticket";
 }
 
-function BuyButton(props) {
+function TicketButton(props) {
     const classes = useStyles();
     return(
             <Button className={classes.button} variant="contained" onClick={() => { clicked(props.value) }}>
@@ -20,4 +22,4 @@ function BuyButton(props) {
     )
 }
 
-export default BuyButton;
+export default TicketButton;

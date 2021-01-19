@@ -19,8 +19,8 @@ const useStyles = makeStyles({
 function TeamPage(){
     const classes = useStyles();
 
-    const title = useSelector(state => state.game.title, shallowEqual);
-    const rows = useSelector(state => state.game.rows, shallowEqual);
+    const title = useSelector(state => state.team.title, shallowEqual);
+    const rows = useSelector(state => state.team.rows, shallowEqual);
 
     return(
         <div>

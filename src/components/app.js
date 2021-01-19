@@ -10,7 +10,8 @@ import Signup from './signup'
 import PlayerPage from './playerPage'
 import GamePage from './gamePage'
 import TeamPage from './teamPage'
-import TicketPage from './ticketPage'
+import BuyTicketPage from './buyTicketPage'
+import ViewTicketPage from './viewTicketPage'
 
 export default function App () {
   return (
@@ -31,8 +32,14 @@ export default function App () {
         <PublicRoute
           restricted={false}
           exact
-          path="/ticket"
-          component={() => <Layout title="NBA - tickets" component={() => <TicketPage />} />}
+          path="/buyticket"
+          component={() => <Layout title="NBA - Buy tickets" component={() => <BuyTicketPage />} />}
+        />
+        <PublicRoute
+          restricted={false}
+          exact
+          path="/viewticket"
+          component={() => <Layout title="NBA - Tickets" component={() => <ViewTicketPage />} />}
         />
         <PublicRoute
           restricted={false}
