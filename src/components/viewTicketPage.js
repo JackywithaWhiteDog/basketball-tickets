@@ -28,7 +28,9 @@ function ViewTicketPage(){
     useEffect(() => {
         const data = {
             table:　'viewTicket',
-            User_ID: User_ID
+            query:{
+                User_ID: User_ID
+            }
         }
         request({
             url: '/data',
