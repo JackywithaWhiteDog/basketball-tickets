@@ -1,7 +1,8 @@
 import GameSelect from "./select_game";
-import {rows, title, Game_team1, Game_team2, Game_order} from "./data"
 import BasicTable from "./table";
 import { makeStyles } from '@material-ui/core/styles';
+import { shallowEqual, useSelector } from 'react-redux'
+// import {rows, title} from "./data"
 
 const useStyles = makeStyles({
     SelectDiv:{
@@ -18,13 +19,17 @@ const useStyles = makeStyles({
 
 function GamePage(){
     const classes = useStyles();
+    
+    const title = useSelector(state => state.game.title, shallowEqual);
+    const rows = useSelector(state => state.game.rows, shallowEqual);
+
     return(
         <div>
             <div className={classes.SelectDiv}>
-                <GameSelect team1={Game_team1} team2={Game_team2} order={Game_order}/>
+                <GameSelect/>
             </div>
             <div className={classes.TableDiv}>
-                <BasicTable rows={rows} title={title} checkbox={true} TableStyle={classes.container}/>
+                <BasicTable rows={rows} title={title} button={true} TableStyle={classes.container}/>
             </div>
         </div>
     )

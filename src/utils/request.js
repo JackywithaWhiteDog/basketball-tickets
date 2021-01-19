@@ -3,7 +3,7 @@ import { store } from '../redux/store'
 import { getToken } from './cookie'
 
 const service = axios.create({
-  baseURL: 'http://192.168.88.17/:5000/api',
+  baseURL: 'http://192.168.125.236:5000/api',
   timeout: 5000
 })
 

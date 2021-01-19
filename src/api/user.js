@@ -4,7 +4,7 @@ export function signup(data) {
   return request({
     url: '/signup',
     method: 'post',
-    data
+    params: data
   })
 }
 
@@ -12,7 +12,7 @@ export function login(data) {
   return request({
     url: '/login',
     method: 'post',
-    data
+    params: data
   })
 }
 

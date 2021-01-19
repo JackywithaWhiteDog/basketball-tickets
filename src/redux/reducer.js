@@ -7,9 +7,17 @@ const initialState = {
   user: {
     token: null
   },
-  data: {
-    players: [],
-    games: []
+  player: {
+    title:[],
+    rows:[]
+  },
+  game: {
+    title:[],
+    rows:[]
+  },
+  team:{
+    title:[],
+    rows:[]
   }
 }
 
@@ -42,6 +50,24 @@ const reducer = (state = initialState, action) => {
           ...state.user,
           token: null
         }
+      }
+    }
+    case 'player/setPlayer': {
+      return {
+        ...state,
+        player: action.payload
+      }
+    }
+    case 'game/setGame': {
+      return {
+        ...state,
+        game: action.payload
+      }
+    }
+    case 'team/setTeam': {
+      return {
+        ...state,
+        team: action.payload
       }
     }
     default: {
