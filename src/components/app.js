@@ -54,8 +54,8 @@ export default function App () {
           path="/team"
           component={() => <Layout title="NBA - Search for teams" component={() => <TeamPage />} />}
         />
-        <PublicRoute
-          restricted={false}
+        <PrivateRoute
+          adminOnly={true}
           exact
           path="/sql"
           component={() => <Layout title="NBA - Search by sql" component={() => <SQLPage />} />}
@@ -77,6 +77,12 @@ export default function App () {
           exact
           path="/redirectTicket"
           redirect={"/viewticket"}
+        />
+        <PrivateRoute
+          adminOnly={true}
+          exact
+          path="/redirectSQL"
+          redirect={"sql"}
         />
       </Switch>
     </HashRouter>

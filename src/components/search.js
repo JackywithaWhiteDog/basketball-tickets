@@ -2,6 +2,9 @@ import { Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import request from '../utils/request'
 import { useDispatch } from 'react-redux'
+import { createHashHistory } from 'history'
+
+const history = createHashHistory()
 
 const useStyles = makeStyles({
     button:{
@@ -180,11 +183,20 @@ function clicked(value, dispatch) {
             method: 'post',
             params: data
           }).then(res => {
+            // alert('Execution Succeed!!!')
             dispatch({ type: 'sql/setSQL',
                        payload: {title:res.Column_names, 
                                  rows:res.Data}
             })
+            history.push('/redirectSQL')
             console.log(res);
+
+        }).catch(err => {
+            // alert('Execution Failed...')
+            dispatch({ type: 'sql/setSQL',
+                       payload: {title:[], 
+                                 rows:[]}
+            })
         })
     }
 }

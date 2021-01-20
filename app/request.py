@@ -248,6 +248,29 @@ def req(request):
             
         return {}
 
+    elif request['table'] == 'sql':
+        col = []
+        with engine.connect() as con:
+            sql_get = con.execute(request['query']['Text'])
+            for v in sql_get:
+                print(v.items())
+                col = v.keys()
+                print(v.keys())
+                break
+        if 'select' in request['query']['Text'].lower():
+            table = []
+            for t in sql_get:
+                table.append([item if type(item) != date else item.strftime('%Y/%m/%d') for item in t])
+            to_return = {'Column_names': list(col), #list
+                         'Data': table}
+            return to_return
+        to_return = {
+            'Column_names': [], #list
+            'Data': []
+        }
+        return to_return
+
+
 def register(user_info):
     with engine.connect() as con:
         sql_get = con.execute("SELECT COUNT(*) FROM User;")

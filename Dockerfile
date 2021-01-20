@@ -1,24 +1,24 @@
-# FROM node:current-alpine3.10 AS react
+FROM node:current-alpine3.10 AS react
 
-# WORKDIR  /server
+WORKDIR  /server
 
-# ENV PATH /app/node_modules/.bin:$PATH
+ENV PATH /app/node_modules/.bin:$PATH
 
-# COPY package.json ./
-# COPY package-lock.json ./
-# RUN npm ci --silent
+COPY package.json ./
+COPY package-lock.json ./
+RUN npm ci --silent
 
-# COPY . /server
+COPY . /server
 
-# RUN npm run build
+RUN npm run build
 
 FROM python:latest
 
 WORKDIR /server
 
-COPY . /server
+# COPY . /server
 
-# COPY --from=react /server/app app
+COPY --from=react /server/app app
 
 # COPY app /server/app
 

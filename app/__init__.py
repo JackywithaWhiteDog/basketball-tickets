@@ -20,7 +20,7 @@ def create_app():
   with app.app_context():
     init_db()
     from .api import api_create
-    # from .website import website_create
+    from .website import website_create
     app.register_blueprint(api_create())
-    # app.register_blueprint(website_create())
+    app.register_blueprint(website_create())
     return app

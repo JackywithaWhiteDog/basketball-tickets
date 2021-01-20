@@ -74,11 +74,23 @@ def api_create():
       }
     except:
         return 'Bad Request', 400
-    if payload['table'] not in ['player', 'team', 'game', 'viewTicket', 'buyTicket', 'refundTicket', 'getTicketData']:
+    if payload['table'] not in ['player', 'team', 'game', 'viewTicket', 'buyTicket', 'refundTicket', 'getTicketData', 'sql']:
       return 'Bad Request', 400
     print(payload)
     res = req(payload)
     res['code'] = 200
+    # if payload['table'] == 'sql':
+    #   try:
+    #     res = req(payload)
+    #     res['code'] = 200
+    #   except:
+    #     res = {
+    #       'code': 500,
+    #       'err': 'Execution Falied'
+    #     }
+    # else:
+    #   res = req(payload)
+    #   res['code'] = 200
     # print(type(res))
     # print(type(res['Data']))
     # print(type(res['Data'][0]))

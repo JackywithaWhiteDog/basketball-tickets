@@ -4,6 +4,7 @@ import { makeStyles, Drawer, List, ListItem, ListItemIcon, ListItemText, Link, D
 import SportsBasketballIcon from "@material-ui/icons/SportsBasketball"
 import GroupIcon from "@material-ui/icons/Group"
 import PersonIcon from "@material-ui/icons/Person"
+import SearchIcon from "@material-ui/icons/Search"
 import ConfirmationNumberIcon from '@material-ui/icons/ConfirmationNumber'
 
 const drawerWidth = 240;
@@ -25,6 +26,7 @@ export default function Sidebar () {
   const classes = useStyles()
   const token = useSelector(state => state.user.token, shallowEqual)
   const name = useSelector(state => state.user.name, shallowEqual)
+  const admin = useSelector(state => state.user.admin, shallowEqual)
 
   const openSidebar = useSelector(state => state.utils.sidebar, shallowEqual)
   return (
@@ -74,6 +76,17 @@ export default function Sidebar () {
                 <ConfirmationNumberIcon />
               </ListItemIcon>
               <ListItemText primary="Tickets" />
+            </ListItem>
+          </Link>
+        }
+        {
+          (token && admin) &&
+          <Link component={RouterLink} to="/sql" color="inherit"  variant="body2" underline='none'>
+            <ListItem button key="sql">
+              <ListItemIcon>
+                <SearchIcon />
+              </ListItemIcon>
+              <ListItemText primary="SQL" />
             </ListItem>
           </Link>
         }
