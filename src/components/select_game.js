@@ -37,7 +37,7 @@ function GameSelect(){
             {team1[0]}
             {team2[0]}
             {order[0]}
-            {fav[0]}
+            {/* {fav[0]} */}
             {button}
         </div>
     )

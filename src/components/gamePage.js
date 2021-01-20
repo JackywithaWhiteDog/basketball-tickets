@@ -1,4 +1,4 @@
-import ViewTicketSelect from "./select_viewTicket";
+import GameSelect from "./select_game";
 import BasicTable from "./table";
 import { makeStyles } from '@material-ui/core/styles';
 import { shallowEqual, useSelector } from 'react-redux'
@@ -27,7 +27,7 @@ function GamePage(){
     return(
         <div>
             <div className={classes.SelectDiv}>
-                <ViewTicketSelect/>
+                <GameSelect/>
             </div>
             <div className={classes.TableDiv}>
                 <BasicTable rows={rows} title={title} gamebutton={token} TableStyle={classes.container}/>

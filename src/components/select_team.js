@@ -34,7 +34,7 @@ function TeamSelect(){
             alignItems="flex-end"
         >
             {order[0]}
-            {fav[0]}
+            {/* {fav[0]} */}
             {button}
         </Grid>
     )

@@ -39,7 +39,7 @@ function PlayerSelect(props){
             {pos[0]}
             {team[0]}
             {order[0]}
-            {fav[0]}
+            {/* {fav[0]} */}
             {button}
         </Grid>
     )
