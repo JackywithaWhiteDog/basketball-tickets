@@ -46,7 +46,7 @@ def api_create():
       }
       return Response(json.dumps(res), mimetype='application/json')
     res = {
-      'code': 401
+      'code': 401,
       'err': 'Account and password not matched'
     }
     return Response(json.dumps(res), mimetype='application/json')
@@ -76,13 +76,16 @@ def api_create():
       }
     except:
         return 'Bad Request', 400
-    if payload['table'] not in ['player', 'team', 'game']:
+    if payload['table'] not in ['player', 'team', 'game', 'viewTicket', 'buyTicket', 'refundTicket', 'getTicketData']:
       return 'Bad Request', 400
+    print(payload)
     res = req(payload)
     res['code'] = 200
-    print(type(res))
-    print(type(res['Data']))
-    print(type(res['Data'][0]))
+    # print(type(res))
+    # print(type(res['Data']))
+    # print(type(res['Data'][0]))
+    # print(type(res['Data'][0][1]))
+    print(res)
     return Response(json.dumps(res), mimetype='application/json')
 
   return api
