@@ -27,6 +27,10 @@ const initialState = {
   viewticket:{
     title:[],
     rows:[]
+  },
+  sql:{
+    title:[],
+    rows:[]
   }
 }
 
@@ -90,6 +94,12 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         buyticket: action.payload
+      }
+    }
+    case 'sql/setSQL': {
+      return {
+        ...state,
+        sql: action.payload
       }
     }
     default: {
