@@ -22,14 +22,18 @@ const useStyles = makeStyles({
 function ViewTicketPage(){
     const classes = useStyles();
 
-    const User_ID = useSelector(state => state.user.tocken, shallowEqual);
+    const token = useSelector(state => state.user.token, shallowEqual)
+    // const User_ID = useSelector(state => state.user.tocken, shallowEqual);
 
     const dispatch =  useDispatch();
     useEffect(() => {
         const data = {
             table:　'viewTicket',
-            User_ID: User_ID
+            query: {
+                User_ID: token
+            }
         }
+        console.log(data)
         request({
             url: '/data',
             method: 'post',

@@ -4,6 +4,7 @@ import { shallowEqual, useSelector } from "react-redux"
 
 const PrivateRoute = ({component: Component, redirect, ...rest}) => {
   const token = useSelector(state => state.user.token, shallowEqual)
+  console.log(token)
   return (
     <Route
       {...rest}
@@ -24,6 +25,7 @@ const PrivateRoute = ({component: Component, redirect, ...rest}) => {
 
 const PublicRoute = ({component: Component, restricted, redirect, ...rest}) => {
   const token = useSelector(state => state.user.token, shallowEqual)
+  console.log(token)
   return (
     <Route
       {...rest}

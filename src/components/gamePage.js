@@ -22,6 +22,7 @@ function GamePage(){
     
     const title = useSelector(state => state.game.title, shallowEqual);
     const rows = useSelector(state => state.game.rows, shallowEqual);
+    const token = useSelector(state => state.user.token, shallowEqual)
 
     return(
         <div>
@@ -29,7 +30,7 @@ function GamePage(){
                 <ViewTicketSelect/>
             </div>
             <div className={classes.TableDiv}>
-                <BasicTable rows={rows} title={title} gamebutton={true} TableStyle={classes.container}/>
+                <BasicTable rows={rows} title={title} gamebutton={token} TableStyle={classes.container}/>
             </div>
         </div>
     )

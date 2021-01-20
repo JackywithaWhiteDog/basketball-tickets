@@ -3,6 +3,9 @@ import { Link as RouterLink } from 'react-router-dom'
 import clsx from 'clsx'
 import { makeStyles, IconButton, Toolbar, Typography, Button, Link } from "@material-ui/core"
 import MenuIcon from "@material-ui/icons/Menu"
+import { createHashHistory } from 'history'
+
+const history = createHashHistory()
 
 const drawerWidth = 240;
 
@@ -33,6 +36,11 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
+const logout = dispatch => {
+  dispatch({type: 'user/resetToken'})
+  history.push('/player')
+}
+
 export default function Header (props) {
   const token = useSelector(state => state.user.token, shallowEqual)
 
@@ -60,7 +68,7 @@ export default function Header (props) {
         </Typography>
         {
           token ?
-          <Button variant="outlined">
+          <Button variant="outlined" onClick={() => logout(dispatch)}>
             Logout
           </Button>
           :

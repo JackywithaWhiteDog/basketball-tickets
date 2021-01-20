@@ -11,45 +11,43 @@ def api_create():
 
   @api.route('/signup', methods=['POST'])
   def signup():
+    from app.request import register
     try:
-      name = request.args['name']
-      account = request.args['account']
-      password = request.args['password']
+      payload = {
+        'Name': request.args['name'],
+        'AccountName': request.args['account'],
+        'Password': request.args['password']
+      }
     except:
         return 'Bad Request', 400
 
-    with engine.connect() as connection:
-      with connection.begin():
-        connection.execute(insert('User').
-                           values(Name=name,
-                                  Account=account,
-                                  Password=password))
-
-    res = {
-      'code': 200,
-    }
-    return Response(json.dumps(res), mimetype='application/json')
-
-  @api.route('/login', methods=['POST'])
-  def login():
-    try:
-      account = request.args['account']
-      password = request.args['password']
-    except:
-        return 'Bad Request', 400
-    with engine.connect() as connection:
-      result = connection.execute(f"select * from User where account='{account}' and password='{password}'")
-    cnt = 0
-    for row in result:
-      cnt += 1
-      break
-    if cnt > 0:
+    if register(payload):
       res = {
         'code': 200,
       }
       return Response(json.dumps(res), mimetype='application/json')
+    return 'Bad Request', 400
+
+  @api.route('/login', methods=['POST'])
+  def login():
+    from app.request import login
+    try:
+      payload = {
+        'AccountName': request.args['account'],
+        'Password': request.args['password']
+      }
+    except:
+        return 'Bad Request', 400
+    token = login(payload)
+    if token is not None:
+      res = {
+        'code': 200,
+        'token': token
+      }
+      return Response(json.dumps(res), mimetype='application/json')
     res = {
       'code': 401
+      'err': 'Account and password not matched'
     }
     return Response(json.dumps(res), mimetype='application/json')
 
@@ -82,7 +80,9 @@ def api_create():
       return 'Bad Request', 400
     res = req(payload)
     res['code'] = 200
-    print(res['Data'][0])
+    print(type(res))
+    print(type(res['Data']))
+    print(type(res['Data'][0]))
     return Response(json.dumps(res), mimetype='application/json')
 
   return api

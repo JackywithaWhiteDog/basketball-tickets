@@ -43,6 +43,7 @@ const reducer = (state = initialState, action) => {
     }
     case 'user/setToken': {
       setToken(action.payload)
+      console.log(action.payload)
       return {
         ...state,
         user: {
@@ -88,7 +89,7 @@ const reducer = (state = initialState, action) => {
     case 'buyticket/setBuyTicket': {
       return {
         ...state,
-        viewticket: action.payload
+        buyticket: action.payload
       }
     }
     default: {

@@ -79,13 +79,13 @@ export default function Form (props) {
           name="password"
           autoComplete="current-password"
         />
-        {
+        {/* {
           props.isLogin &&
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
             label="Remember me"
          />
-        }
+        } */}
         <Button
           type="submit"
           fullWidth

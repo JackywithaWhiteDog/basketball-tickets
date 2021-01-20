@@ -1,6 +1,9 @@
 import { shallowEqual, useSelector } from 'react-redux'
-import { makeStyles, Drawer, List, ListItem, ListItemIcon, ListItemText } from "@material-ui/core"
-import SearchIcon from "@material-ui/icons/Search"
+import { Link as RouterLink } from 'react-router-dom'
+import { makeStyles, Drawer, List, ListItem, ListItemIcon, ListItemText, Link } from "@material-ui/core"
+import SportsBasketballIcon from "@material-ui/icons/SportsBasketball"
+import GroupIcon from "@material-ui/icons/Group"
+import PersonIcon from "@material-ui/icons/Person"
 import ConfirmationNumberIcon from '@material-ui/icons/ConfirmationNumber'
 
 const drawerWidth = 240;
@@ -30,18 +33,38 @@ export default function Sidebar () {
       }}
     >
       <List>
-        <ListItem button key="search">
-          <ListItemIcon>
-            <SearchIcon />
-          </ListItemIcon>
-          <ListItemText primary="Search" />
-        </ListItem>
-        <ListItem button key="tickets">
-          <ListItemIcon>
-            <ConfirmationNumberIcon />
-          </ListItemIcon>
-          <ListItemText primary="Tickets" />
-        </ListItem>
+        <Link component={RouterLink} to="/player" color="inherit"  variant="body2" underline='none'>
+          <ListItem button key="players">
+            <ListItemIcon>
+              <PersonIcon />
+            </ListItemIcon>
+            <ListItemText primary="Players" />
+          </ListItem>
+        </Link>
+        <Link component={RouterLink} to="/team" color="inherit"  variant="body2" underline='none'>
+          <ListItem button key="teams">
+            <ListItemIcon>
+              <GroupIcon />
+            </ListItemIcon>
+            <ListItemText primary="Teams" />
+          </ListItem>
+        </Link>
+        <Link component={RouterLink} to="/game" color="inherit"  variant="body2" underline='none'>
+          <ListItem button key="games">
+            <ListItemIcon>
+              <SportsBasketballIcon />
+            </ListItemIcon>
+            <ListItemText primary="Games" />
+          </ListItem>
+        </Link>
+        <Link component={RouterLink} to="/viewticket" color="inherit"  variant="body2" underline='none'>
+          <ListItem button key="tickets">
+            <ListItemIcon>
+              <ConfirmationNumberIcon />
+            </ListItemIcon>
+            <ListItemText primary="Tickets" />
+          </ListItem>
+        </Link>
       </List>
     </Drawer>
   )

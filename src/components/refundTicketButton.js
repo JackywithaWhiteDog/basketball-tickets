@@ -10,7 +10,7 @@ const useStyles = makeStyles({
 })
 
 function clicked(a, dispatch) {
-    alert(["refund:", a]);
+    // alert(["refund:", a]);
     const data = {
         table:"refundTicket",
         query:{
@@ -22,10 +22,11 @@ function clicked(a, dispatch) {
         method: 'post',
         params:data
       }).then(res => {
-        dispatch({ type: 'viewticket/setViewTicket',
-                   payload: {title:res.Column_names, 
-                             rows:res.Data,}
-        })
+        document.location.href="./#/redirectTicket"
+        // dispatch({ type: 'viewticket/setViewTicket',
+        //            payload: {title:res.Column_names, 
+        //                      rows:res.Data,}
+        // })
     })
 }
 

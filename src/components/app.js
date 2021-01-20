@@ -1,7 +1,7 @@
 // import { useState } from 'react'
 import { HashRouter, Switch } from "react-router-dom"
 // import { PrivateRoute, PublicRoute } from "./route"
-import { PublicRoute } from "./route"
+import { PublicRoute, PrivateRoute } from "./route"
 
 import Layout from './layout'
 //import Table from './table'
@@ -29,14 +29,14 @@ export default function App () {
           path="/player"
           component={() => <Layout title="NBA - Search for players" component={() => <PlayerPage />} />}
         />
-        <PublicRoute
-          restricted={false}
+        <PrivateRoute
+          restricted={true}
           exact
           path="/buyticket"
           component={() => <Layout title="NBA - Buy tickets" component={() => <BuyTicketPage />} />}
         />
-        <PublicRoute
-          restricted={false}
+        <PrivateRoute
+          restricted={true}
           exact
           path="/viewticket"
           component={() => <Layout title="NBA - Tickets" component={() => <ViewTicketPage />} />}
@@ -64,6 +64,12 @@ export default function App () {
           exact
           path="/signup"
           component={() => <Signup />}
+        />
+        <PrivateRoute
+          restricted={true}
+          exact
+          path="/redirectTicket"
+          redirect={"/viewticket"}
         />
       </Switch>
     </HashRouter>

@@ -35,6 +35,7 @@ const useStyles = makeStyles({
 
 function BasicTable(props) {
   const classes = useStyles();
+  console.log(props)
   var AttributeCount = props.title.length - 1;
   console.log(AttributeCount);
 
