@@ -119,10 +119,10 @@ def req(request):
     print(request)
     if request['table'] == 'player':
         col_name = []
-        sql = ' FROM Player'
+        sql = ' FROM Player p INNER JOIN Team t ON p.Team_ID = t.ID  '
         if request['query']['Column'] == 'All':
-            sql = 'SELECT *' + sql
-            col_name = ['ID', 'Name', 'Position', 'Team_ID', 'Age', 'Height', 'Weight', 'College', 'Draft_Year', 'Draft_Round', 'Draft_Number']
+            sql = 'SELECT p.ID, p.Name, p.Position, t.Name, p.Age, p.Height, p.Weight, p.College, p.Draft_Year, p.Draft_Round, p.Draft_Number' + sql
+            col_name = ['ID', 'Name', 'Position', 'Team', 'Age', 'Height', 'Weight', 'College', 'Draft_Year', 'Draft_Round', 'Draft_Number']
         else:
             sql = 'SELECT ' + request['query']['Column'] + sql
             col_name.append(request['query']['Column'])
@@ -146,10 +146,10 @@ def req(request):
         
     elif request['table'] == 'team':
         col_name = []
-        sql = ' FROM Team'
+        sql = ' FROM Team t INNER JOIN Coach c ON t.Coach_ID = c.ID  '
         if request['query']['Column'] == 'All':
-            sql = 'SELECT *' + sql
-            col_name = ['ID', 'Name', 'Court', 'Coach_ID']
+            sql = 'SELECT t.ID, t.Name, t.Court, c.Name' + sql
+            col_name = ['ID', 'Name', 'Court', 'Coach']
         else:
             sql = 'SELECT ' + request['query']['Column'] + sql
             col_name.append(request['query']['Column'])
@@ -167,10 +167,10 @@ def req(request):
 
     elif request['table'] == 'game':
         col_name = []
-        sql = ' FROM Game'
+        sql = ' FROM Game g INNER JOIN Team ht ON g.Home_team_ID=ht.ID INNER JOIN Team at ON g.Away_team_ID=at.ID INNER JOIN Coach c ON ht.Coach_ID = c.ID  '
         if request['query']['Column'] == 'All':
-            sql = 'SELECT *' + sql
-            col_name = ['ID', 'Date', 'Home_team_ID', 'Away_team_ID', 'Price']
+            sql = 'SELECT g.ID, g.Date, c.Name, ht.Name, at.Name, g.Price' + sql
+            col_name = ['ID', 'Date', 'Court', 'Home_team', 'Away_team', 'Price']
         else:
             sql = 'SELECT ' + request['query']['Column'] + sql
             col_name.append(request['query']['Column'])
@@ -217,15 +217,19 @@ def req(request):
         return to_return
 
     elif request['table'] == 'viewTicket':
-        sql = "SELECT * FROM Ticket WHERE User_ID='"
+        sql = """
+                SELECT tk.ID, g.ID, g.Date, c.Name, tk.Seat, ht.Name, at.Name, g.Price 
+                FROM Ticket tk INNER JOIN Game g ON tk.Game_ID=g.ID INNER JOIN Team ht ON g.Home_team_ID=ht.ID INNER JOIN Team at ON g.Away_team_ID=at.ID INNER JOIN Coach c ON ht.Coach_ID = c.ID  
+                WHERE User_ID='
+              """
         sql += str(request['query']['User_ID']) + "';"
-        col_name = ["Ticket_ID", "Seat", "Game_ID", "User_ID"]
+        col_name = ["Ticket_ID", "Game_ID", 'Date', 'Court', "Seat", 'Home_team', 'Away_team', 'Price']
 
         with engine.connect() as con:
             sql_get = con.execute(sql)
             table = []
             for t in sql_get:
-                table.append(list(t))
+                table.append([item if type(item) != date else item.strftime('%Y/%m/%d') for item in t])
 
         to_return = {'Column_names': col_name, #list
                 'Data': table}
@@ -273,7 +277,7 @@ def login(login_info):
         for t in sql_get:
             table.append(list(t))
 
-    if login_info['Password'] == table[0][1]:
+    if len(table) > 0 and login_info['Password'] == table[0][1]:
         return table[0][0] #it is user ID.
     else:
         return None

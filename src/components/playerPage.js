@@ -28,7 +28,7 @@ function PlayerPage(){
                 <PlayerSelect/>
             </div>
             <div className={classes.TableDiv}>
-                <BasicTable rows={rows} title={title} checkbox={true} TableStyle={classes.container}/>
+                <BasicTable rows={rows} title={title} checkbox={false} TableStyle={classes.container}/>
             </div>
         </div>
     )
