@@ -2,9 +2,9 @@ import { Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import request from '../utils/request'
 import { useDispatch } from 'react-redux'
-import { createHashHistory } from 'history'
+// import { createHashHistory } from 'history'
 
-const history = createHashHistory()
+// const history = createHashHistory()
 
 const useStyles = makeStyles({
     button:{

@@ -270,14 +270,19 @@ def register(user_info):
     return True
 
 def login(login_info):
-    sql = "SELECT ID, Passward FROM User WHERE Account='" + login_info['AccountName'] + "';"
+    sql = "SELECT ID, Name, Admin, Passward FROM User WHERE Account='" + login_info['AccountName'] + "';"
     with engine.connect() as con:
         sql_get = con.execute(sql)
         table = []
         for t in sql_get:
             table.append(list(t))
 
-    if len(table) > 0 and login_info['Password'] == table[0][1]:
-        return table[0][0] #it is user ID.
+    if len(table) > 0 and login_info['Password'] == table[0][3]:
+        # return table[0][0] #it is user ID.
+        return {
+            'token': table[0][0],
+            'name': table[0][1],
+            'admin': table[0][2]
+        }
     else:
         return None

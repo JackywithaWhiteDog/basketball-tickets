@@ -5,7 +5,9 @@ const initialState = {
     sidebar: true
   },
   user: {
-    token: null
+    token: null,
+    name: 'Guest',
+    admin: false
   },
   player: {
     title:[],
@@ -41,24 +43,26 @@ const reducer = (state = initialState, action) => {
         }
       }
     }
-    case 'user/setToken': {
+    case 'user/setUser': {
       setToken(action.payload)
       console.log(action.payload)
       return {
         ...state,
         user: {
-          ...state.user,
-          token: action.payload
+          token: action.payload.token,
+          name: action.payload.name,
+          admin: action.payload.admin
         }
       }
     }
-    case 'user/resetToken': {
+    case 'user/resetUser': {
       removeToken()
       return {
         ...state,
         user: {
-          ...state.user,
-          token: null
+          token: null,
+          name: 'Guest',
+          admin: false
         }
       }
     }

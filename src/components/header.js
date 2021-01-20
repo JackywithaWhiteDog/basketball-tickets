@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 const logout = dispatch => {
-  dispatch({type: 'user/resetToken'})
+  dispatch({type: 'user/resetUser'})
   history.push('/player')
 }
 

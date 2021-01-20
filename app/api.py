@@ -38,12 +38,10 @@ def api_create():
       }
     except:
         return 'Bad Request', 400
-    token = login(payload)
-    if token is not None:
-      res = {
-        'code': 200,
-        'token': token
-      }
+    result = login(payload)
+    if result is not None:
+      res = result
+      res['code'] = 200
       return Response(json.dumps(res), mimetype='application/json')
     res = {
       'code': 401,

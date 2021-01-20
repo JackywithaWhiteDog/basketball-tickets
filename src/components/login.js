@@ -17,7 +17,7 @@ const handleSubmit = dispatch => event => {
   login(data).then(res => {
     alert('Login Succeed!!!')
     console.log(res)
-    dispatch({ type: 'user/setToken', payload: res.token})
+    dispatch({ type: 'user/setUser', payload: res})
     history.push('/')
   }).catch(err => {
     alert(err)

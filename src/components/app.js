@@ -30,13 +30,13 @@ export default function App () {
           component={() => <Layout title="NBA - Search for players" component={() => <PlayerPage />} />}
         />
         <PrivateRoute
-          restricted={true}
+          adminOnly={false}
           exact
           path="/buyticket"
           component={() => <Layout title="NBA - Buy tickets" component={() => <BuyTicketPage />} />}
         />
         <PrivateRoute
-          restricted={true}
+          adminOnly={false}
           exact
           path="/viewticket"
           component={() => <Layout title="NBA - Tickets" component={() => <ViewTicketPage />} />}
@@ -66,7 +66,7 @@ export default function App () {
           component={() => <Signup />}
         />
         <PrivateRoute
-          restricted={true}
+          adminOnly={false}
           exact
           path="/redirectTicket"
           redirect={"/viewticket"}

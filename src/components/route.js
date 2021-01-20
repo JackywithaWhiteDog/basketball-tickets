@@ -2,14 +2,15 @@ import React from "react"
 import { Route, Redirect } from "react-router-dom"
 import { shallowEqual, useSelector } from "react-redux"
 
-const PrivateRoute = ({component: Component, redirect, ...rest}) => {
+const PrivateRoute = ({component: Component, redirect, adminOnly, ...rest}) => {
   const token = useSelector(state => state.user.token, shallowEqual)
+  const admin = useSelector(state => state.user.admin, shallowEqual)
   console.log(token)
   return (
     <Route
       {...rest}
       render = {props => (
-        token ?
+        token && (!adminOnly || admin) ?
           (
             redirect ?
             <Redirect to={redirect} />

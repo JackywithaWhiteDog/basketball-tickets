@@ -5,8 +5,8 @@ import {
   CssBaseline,
   Typography,
   TextField,
-  FormControlLabel,
-  Checkbox,
+  // FormControlLabel,
+  // Checkbox,
   Button,
   Link
 } from '@material-ui/core'
