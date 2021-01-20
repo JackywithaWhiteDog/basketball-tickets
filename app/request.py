@@ -1,5 +1,5 @@
 from sqlalchemy import create_engine
-from datetime import datetime
+from datetime import date
 
 engine = create_engine('mysql+pymysql://root:root@mysql:3306/nba')
 
@@ -194,8 +194,86 @@ def req(request):
         with engine.connect() as con:
             sql_get = con.execute(sql)
             for t in sql_get:
-                table.append(list([t if type(t) != datetime else t.strftime('%Y/%m/%d') for item in t]))
+                table.append([item if type(item) != date else item.strftime('%Y/%m/%d') for item in t])
 
         to_return = {'Column_names': col_name, #list
                 'Data': table}
         return to_return
+
+
+    elif request['table'] == 'getTicketData':
+        sql = "SELECT Seat, Count(*) FROM Ticket WHERE Game_ID='"
+        sql += str(request['query']['Game_ID']) + "' and User_ID is NULL GROUP BY Seat;"
+        col_name = ["Seat", "Available_num"]
+
+        with engine.connect() as con:
+            sql_get = con.execute(sql)
+            table = []
+            for t in sql_get:
+                table.append(list(t))
+
+        to_return = {'Column_names': col_name, #list
+                'Data': table}
+        return to_return
+
+    elif request['table'] == 'viewTicket':
+        sql = "SELECT * FROM Ticket WHERE User_ID='"
+        sql += str(request['query']['User_ID']) + "';"
+        col_name = ["Ticket_ID", "Seat", "Game_ID", "User_ID"]
+
+        with engine.connect() as con:
+            sql_get = con.execute(sql)
+            table = []
+            for t in sql_get:
+                table.append(list(t))
+
+        to_return = {'Column_names': col_name, #list
+                'Data': table}
+        return to_return
+
+    elif request['table'] == 'buyTicket':
+        sql = f"UPDATE Ticket SET User_ID='{request['query']['User_ID']}' WHERE Game_ID={request['query']['Game_ID']} AND User_ID is NULL limit 1;"
+        with engine.connect() as con:
+            sql_get = con.execute(sql)
+        return {}
+
+    elif request['table'] == 'refundTicket':
+        sql = "UPDATE Ticket SET User_ID=NULL WHERE ID='" + str(request['query']['Ticket_ID']) + "';"
+        with engine.connect() as con:
+            sql_get = con.execute(sql)
+            
+        return {}
+
+def register(user_info):
+    with engine.connect() as con:
+        sql_get = con.execute("SELECT COUNT(*) FROM User;")
+        table = []
+        for t in sql_get:
+            table.append(list(t))
+
+    ID = 2021000 + table[0][0]
+
+    sql = "INSERT INTO User (ID, Name, Account, Passward) VALUES ("
+    sql += str(ID) + ", '" + user_info['Name'] + "', '" + user_info['AccountName']
+    sql += "', '" + user_info['Password'] + "');"
+
+    with engine.connect() as con:
+        con.execute(sql)
+        #sql_get = con.execute(sql)
+        # table = []
+        # for t in sql_get:
+        #     table.append(t)
+    return True
+
+def login(login_info):
+    sql = "SELECT ID, Passward FROM User WHERE Account='" + login_info['AccountName'] + "';"
+    with engine.connect() as con:
+        sql_get = con.execute(sql)
+        table = []
+        for t in sql_get:
+            table.append(list(t))
+
+    if login_info['Password'] == table[0][1]:
+        return table[0][0] #it is user ID.
+    else:
+        return None
