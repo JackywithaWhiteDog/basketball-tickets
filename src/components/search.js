@@ -165,6 +165,28 @@ function clicked(value, dispatch) {
         console.log([order,
                      fav]);
     }
+    else if(type === "sql")
+    {
+        let text = attr;
+        const data = {
+            table:"sql",
+            query:{
+                Text:text
+            }
+        }
+        console.log(data)
+        request({
+            url: '/data',
+            method: 'post',
+            params: data
+          }).then(res => {
+            dispatch({ type: 'sql/setSQL',
+                       payload: {title:res.Column_names, 
+                                 rows:res.Data}
+            })
+            console.log(res);
+        })
+    }
 }
 
 function SearchButton(props) {

@@ -10,6 +10,7 @@ import Signup from './signup'
 import PlayerPage from './playerPage'
 import GamePage from './gamePage'
 import TeamPage from './teamPage'
+import SQLPage from './sqlPage'
 import BuyTicketPage from './buyTicketPage'
 import ViewTicketPage from './viewTicketPage'
 
@@ -52,6 +53,12 @@ export default function App () {
           exact
           path="/team"
           component={() => <Layout title="NBA - Search for teams" component={() => <TeamPage />} />}
+        />
+        <PublicRoute
+          restricted={false}
+          exact
+          path="/sql"
+          component={() => <Layout title="NBA - Search by sql" component={() => <SQLPage />} />}
         />
         <PublicRoute
           restricted={true}
